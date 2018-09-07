@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Facec-Inv | Ajouter un employe</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">             
+                    <p:outputLabel value="EmployeMatricule:" for="employeMatricule" />
+                    <p:inputText id="employeMatricule" value="#{employeManagedBean.formEmploye.employeMatricule}" title="EmployeMatricule" required="true" requiredMessage="The EmployeMatricule field is required."/>
+                    <p:outputLabel value="EmployeNomPrenom:" for="employeNomPrenom" />
+                    <p:inputText id="employeNomPrenom" value="#{employeManagedBean.formEmploye.employeNomPrenom}" title="EmployeNomPrenom" required="true" requiredMessage="The EmployeNomPrenom field is required."/>
+                    <p:outputLabel value="EmployeSexe:" for="employeSexe" />
+                    <p:inputText id="employeSexe" value="#{employeManagedBean.formEmploye.employeSexe}" title="EmployeSexe" required="true" requiredMessage="The EmployeSexe field is required."/>
+                    <p:outputLabel value="EmployeStatut:" for="employeStatut" />
+                    <p:inputText id="employeStatut" value="#{employeManagedBean.formEmploye.employeStatut}" title="EmployeStatut" required="true" requiredMessage="The EmployeStatut field is required."/>
+                </p:panelGrid>
+                <h:commandButton value="Enregistrer" action="#{employeManagedBean.enregistrer()}"/>
+            </h:form>
+        </f:view>
+
+        
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{employeManagedBean.dataListEmploye}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EmployeId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.employeId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EmployeMatricule"/>
+                        </f:facet>
+                        <h:outputText value="#{item.employeMatricule}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EmployeNomPrenom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.employeNomPrenom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EmployeSexe"/>
+                        </f:facet>
+                        <h:outputText value="#{item.employeSexe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EmployeStatut"/>
+                        </f:facet>
+                        <h:outputText value="#{item.employeStatut}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+
+    </h:body>
+</html>
+

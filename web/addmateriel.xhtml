@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Facec-Inv | Ajouter materiel</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="MatCode:" for="matCode" />
+                    <p:inputText id="matCode" value="#{materielManagedBean.formMateriel.matCode}" title="MatCode" required="true" requiredMessage="The MatCode field is required."/>
+                    <p:outputLabel value="MatMarque:" for="matMarque" />
+                    <p:inputText id="matMarque" value="#{materielManagedBean.formMateriel.matMarque}" title="MatMarque" required="true" requiredMessage="The MatMarque field is required."/>
+                    <p:outputLabel value="MatModel:" for="matModel" />
+                    <p:inputText id="matModel" value="#{materielManagedBean.formMateriel.matModel}" title="MatModel" />
+                    <p:outputLabel value="MatDacquis:" for="matDacquis" />
+                    <p:calendar id="matDacquis" value="#{materielManagedBean.formMateriel.matDacquis}" title="MatDacquis" required="true" requiredMessage="The MatDacquis field is required.">
+<!--                        <f:convertDateTime pattern="yyy/MM/dd" />-->
+                    </p:calendar>
+                    <p:outputLabel value="MatValacquis:" for="matValacquis" />
+                    <p:inputText id="matValacquis" value="#{materielManagedBean.formMateriel.matValacquis}" title="MatValacquis" required="true" requiredMessage="The MatValacquis field is required."/>
+                    <p:outputLabel value="CatId:" for="catid" />
+                    <p:selectOneMenu converter="omnifaces.SelectItemsConverter" id="catid" value="#{materielManagedBean.formMateriel.catId}" required="true" requiredMessage="The CatId field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel= "Choisir une categorie" itemValue=""/>
+                        <f:selectItems var="cat" itemValue="#{cat}" itemLabel="#{cat.catLibelle}" value="#{categorieManagedBean.dataListCategorie}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <h:commandButton value="Enregistrer" action="#{materielManagedBean.enregistrer()}"/>
+            </h:form>
+        </f:view>
+
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{materielManagedBean.dataListMateriel}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatCode"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matCode}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatMarque"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matMarque}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatModel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matModel}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatDacquis"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matDacquis}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatValacquis"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matValacquis}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="CatId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.catId.catLibelle}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

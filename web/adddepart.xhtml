@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"              
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">                   
+                    <p:outputLabel value="DepRef:" for="depRef" />
+                    <p:inputText id="depRef" value="#{departementManagedBean.formDepartement.depRef}" title="DepRef" required="true" requiredMessage="The DepRef field is required."/>
+                    <p:outputLabel value="DepLibelle:" for="depLibelle" />
+                    <p:inputText id="depLibelle" value="#{departementManagedBean.formDepartement.depLibelle}" title="DepLibelle" required="true" requiredMessage="The DepLibelle field is required."/>
+                    <p:outputLabel value="MatId:" for="matId" />
+                    <p:selectOneMenu converter="omnifaces.SelectItemsConverter" id="matId" value="#{departementManagedBean.formDepartement.matId}" required="true" requiredMessage="The MatId field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel= "Choisir un element" itemValue=""/>
+                        <f:selectItems var="mat" itemValue="#{mat}" itemLabel="#{mat.matCode}" value="#{materielManagedBean.dataListMateriel}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="BureauId:" for="bureauId" />
+                    <p:selectOneMenu converter="omnifaces.SelectItemsConverter" id="bureauId" value="#{departementManagedBean.formDepartement.bureauId}" required="true" requiredMessage="The BureauId field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel= "Choisir un element" itemValue=""/>
+                        <f:selectItems var="bur" itemValue="#{bur}" itemLabel="#{bur.bureauRef}" value="#{bureauManagedBean.dataListBureau}"  />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <h:commandButton value="Enregistrer" action="#{departementManagedBean.enregistrer()}"/>
+            </h:form>
+        </f:view>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{departementManagedBean.dataListDepartement}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DepId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.depId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DepRef"/>
+                        </f:facet>
+                        <h:outputText value="#{item.depRef}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DepLibelle"/>
+                        </f:facet>
+                        <h:outputText value="#{item.depLibelle}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matId.matCode}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="BureauId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bureauId.bureauRef}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

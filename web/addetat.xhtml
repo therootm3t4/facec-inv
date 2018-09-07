@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+
+            <h:form>
+                
+                <p:panelGrid columns="2">                   
+                    <p:outputLabel value="Etat :" for="etatStatut" />
+                    <p:inputText id="etatStatut" value="#{etatManagedBean.formEtat.etatStatut}" title="EtatStatut" required="true" requiredMessage="The EtatStatut field is required."/>
+                    <p:outputLabel value="Date:" for="etatDate" />
+                    <p:calendar id="etatDate" value="#{etatManagedBean.formEtat.etatDate}" title="EtatDate" required="true" requiredMessage="The EtatDate field is required.">
+<!--                        <f:convertDateTime pattern="MM/dd/yyyy" />-->
+                    </p:calendar>
+                    <p:outputLabel value="Code Materiel:" for="matId" />
+                    <p:selectOneMenu converter="omnifaces.SelectItemsConverter" id="matId" value="#{etatManagedBean.formEtat.matId}" required="true" requiredMessage="The MatId field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel= "Choisir un element" itemValue=""/>
+                        <f:selectItems var="Mat" itemValue="#{Mat}" itemLabel="#{Mat.matCode}" value="#{materielManagedBean.dataListMateriel}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <h:commandButton action="#{etatManagedBean.enregistrer()}" value="Enregistrer"/>
+                <h:commandButton action="#{etatManagedBean.supprimer()}" value="Supprimer"/>
+            
+                <p:dataTable value="#{etatManagedBean.dataListEtat}" var="item" rowKey="#{item.etatId}"
+                             selection="#{etatManagedBean.selectedEtat}" selectionMode="single">
+                    <p:ajax event="rowSelect" listener="#{etatManagedBean.rowSelected()}" update="@form" />
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EtatId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etatId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EtatStatut"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etatStatut}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EtatDate"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etatDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="MatId"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matId.matCode}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+    </h:body>
+</html>
+
